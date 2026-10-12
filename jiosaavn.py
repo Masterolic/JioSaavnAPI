@@ -15,9 +15,9 @@ def search_for_song(query, lyrics, songdata):
     response = requests.get(search_base_url).text.encode().decode('unicode-escape')
     pattern = r'\(From "([^"]+)"\)'
     response = json.loads(re.sub(pattern, r"(From '\1')", response))
-    song_response = response #['songs']['data']
-  #  if not songdata:
-    return song_response
+    song_response = response['songs']['data']
+    if not songdata:
+       return song_response
     songs = []
     for song in song_response:
         id = song['id']
